@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <!-- ═══════════════════════════════════════════
+         GREETING SECTION
+    ════════════════════════════════════════════ -->
+    <header class="greeting-section">
+
+      <!-- Theme toggle (top-right corner) -->
+      <button
+        id="theme-toggle"
+        class="theme-toggle"
+        aria-label="Switch to light mode"
+        title="Toggle light / dark mode"
+      >🌙</button>
+
+      <div class="greeting-content">
+        <p id="current-date" class="date-display"></p>
+
+        <!-- Greeting line with editable name -->
+        <h1 class="greeting-text">
+          <span id="greeting-phrase"></span>
+          <button
+            id="name-edit-btn"
+            class="name-edit-btn"
+            aria-label="Set your name"
+            title="Click to set your name"
+          ><span id="greeting-name">there</span> ✏️</button>
+        </h1>
+
+        <p id="current-time" class="time-display"></p>
+      </div>
+
+      <!-- Inline name editor (hidden by default) -->
+      <form id="name-form" class="name-form" hidden autocomplete="off">
+        <input
+          type="text"
+          id="name-input"
+          class="name-input"
+          placeholder="Enter your name…"
+          maxlength="30"
+          aria-label="Your name"
+        />
+        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+        <button type="button" id="name-cancel" class="btn btn-ghost btn-sm">Cancel</button>
+      </form>
+
+    </header>
+
+    <main class="dashboard-grid">
+
+      <!-- ═══════════════════════════════════════════
+           FOCUS TIMER SECTION
+      ════════════════════════════════════════════ -->
+      <section class="card timer-section" aria-label="Focus Timer">
+        <h2 class="card-title">
+          <span class="card-icon" aria-hidden="true">⏱️</span>
+          Focus Timer
+        </h2>
+
+        <div class="timer-display" id="timer-display" aria-live="polite" aria-atomic="true">
+          25:00
+        </div>
+
+        <div class="timer-mode-tabs" role="group" aria-label="Timer mode">
+          <button class="mode-tab active" data-minutes="25">Focus</button>
+          <button class="mode-tab" data-minutes="5">Short Break</button>
+          <button class="mode-tab" data-minutes="15">Long Break</button>
+        </div>
+
+        <div class="timer-controls">
+          <button class="btn btn-primary" id="timer-start" aria-label="Start timer">Start</button>
+          <button class="btn btn-secondary" id="timer-stop" aria-label="Stop timer" disabled>Stop</button>
+          <button class="btn btn-ghost" id="timer-reset" aria-label="Reset timer">Reset</button>
+        </div>
+
+        <p class="timer-sessions" id="timer-sessions">Sessions today: <strong>0</strong></p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TO-DO LIST SECTION
+      ════════════════════════════════════════════ -->
+      <section class="card todo-section" aria-label="To-Do List">
+        <h2 class="card-title">
+          <span class="card-icon" aria-hidden="true">✅</span>
+          To-Do List
+        </h2>
+
+        <form class="todo-form" id="todo-form" autocomplete="off">
+          <input
+            type="text"
+            id="todo-input"
+            class="todo-input"
+            placeholder="Add a new task…"
+            maxlength="120"
+            aria-label="New task"
+          />
+          <button type="submit" class="btn btn-primary" aria-label="Add task">Add</button>
+        </form>
+
+        <div class="todo-filters" role="group" aria-label="Filter tasks">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="active">Active</button>
+          <button class="filter-btn" data-filter="done">Done</button>
+        </div>
+
+        <ul class="todo-list" id="todo-list" aria-label="Task list">
+          <!-- Tasks injected by JS -->
+        </ul>
+
+        <p class="todo-footer" id="todo-footer"></p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           QUICK LINKS SECTION
+      ════════════════════════════════════════════ -->
+      <section class="card links-section" aria-label="Quick Links">
+        <h2 class="card-title">
+          <span class="card-icon" aria-hidden="true">🔗</span>
+          Quick Links
+        </h2>
+
+        <form class="link-form" id="link-form" autocomplete="off">
+          <input
+            type="text"
+            id="link-name-input"
+            class="link-input"
+            placeholder="Label (e.g. GitHub)"
+            maxlength="30"
+            aria-label="Link label"
+          />
+          <input
+            type="url"
+            id="link-url-input"
+            class="link-input"
+            placeholder="URL (e.g. https://github.com)"
+            aria-label="Link URL"
+          />
+          <button type="submit" class="btn btn-primary" aria-label="Add link">Add</button>
+        </form>
+
+        <div class="links-grid" id="links-grid">
+          <!-- Links injected by JS -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Edit Task Modal -->
+    <div class="modal-overlay" id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+      <div class="modal">
+        <h3 class="modal-title" id="modal-title">Edit Task</h3>
+        <input
+          type="text"
+          id="edit-input"
+          class="todo-input"
+          maxlength="120"
+          aria-label="Edit task text"
+        />
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="edit-save">Save</button>
+          <button class="btn btn-ghost" id="edit-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
